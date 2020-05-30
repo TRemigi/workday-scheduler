@@ -24,12 +24,42 @@ var loadBlocks = function () {
             "17": []
         };
     }
-    // NEED TO LOOP THROUGH KEY VALUES AND WRITE TO TEXT AREA WITH CORRESPONDING ID NUMBER
+    
+    // loop through timeBlocks object and write values to corresponding time blocks
     $.each(timeBlocks, function(blockNumber, blockText) {
         var timeBlock = $("#" + blockNumber);
         $(timeBlock).text(blockText);
-        console.log(timeBlock);
     });
+};
+
+var timeChecker = function () {
+
+    var currentHour = moment().hour();
+    console.log(currentHour);
+
+    var timeBlocks = $("textarea");
+
+    $.each(timeBlocks, function(i, block) {
+        var blockId = $(block).attr("id");
+
+        if (blockId > currentHour) {
+            $(block).removeClass("past");
+            $(block).removeClass("present");
+            $(block).addClass("future");
+        }
+        
+        if (blockId == currentHour) {
+            $(block).removeClass("future");
+            $(block).removeClass("past");
+            $(block).addClass("present");
+        }
+
+        if (blockId < currentHour) {
+            $(block).removeClass("future");
+            $(block).removeClass("present");
+            $(block).addClass("past");
+        }
+    })
 };
 
 // save data in time block array to local storage
@@ -48,3 +78,4 @@ $(".saveBtn").on("click", function () {
 })
 
 loadBlocks();
+timeChecker();
