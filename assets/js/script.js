@@ -1,0 +1,53 @@
+// set current date to display at top of calendar
+var currentDayText = moment().format("dddd, MMMM Do");
+$("#currentDay").text(currentDayText);
+
+// create object to hold time block data
+var timeBlocks = {};
+
+
+// load data from local storage and fill in applicable time blocks
+var loadBlocks = function () {
+    timeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
+    console.log(timeBlocks);
+
+    // create key's in time block object if empty
+    if (!timeBlocks) {
+        timeBlocks = {
+            "9": [],
+            "10": [],
+            "11": [],
+            "12": [],
+            "13": [],
+            "14": [],
+            "15": [],
+            "16": [],
+            "17": []
+        };
+    }
+    // NEED TO LOOP THROUGH KEY VALUES AND WRITE TO TEXT AREA WITH CORRESPONDING ID NUMBER
+    for (i=0; i<Object.timeBlocks.length; i++) {
+        var taskText = timeBlocks[i].val().trim();
+        var currentBlock = $(".container").find('#' + i);
+        
+    }
+
+console.log(timeBlocks.length);
+};
+
+// save data in time block array to local storage
+var saveBlocks = function () {
+    localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
+};
+
+$(".saveBtn").on("click", function () {
+    var timeBlock = $(this).attr("id").replace("btn", "");
+    var currentText = $(this).closest(".time-block").find("textarea").val().trim();
+    
+    // save entered text to corresponding key in timeBlocks object
+    timeBlocks[timeBlock] = currentText;
+    saveBlocks();
+    console.log(timeBlocks);
+})
+
+loadBlocks();
