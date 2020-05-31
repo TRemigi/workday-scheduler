@@ -75,6 +75,7 @@ var saveBlocks = function () {
     localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
 };
 
+// function to save user input upon clicking save button
 $(".saveBtn").on("click", function () {
     var timeBlock = $(this).attr("id").replace("btn", "");
     var currentText = $(this).closest(".time-block").find("textarea").val().trim();
@@ -82,7 +83,7 @@ $(".saveBtn").on("click", function () {
     // save entered text to corresponding key in timeBlocks object
     timeBlocks[timeBlock] = currentText;
     saveBlocks();
-    console.log(timeBlocks);
+    $(".saveBtn").blur();
 })
 
 timeChecker();
