@@ -32,13 +32,16 @@ var loadBlocks = function () {
     });
 };
 
+// dynamically style time blocks according to current hour
 var timeChecker = function () {
-
+    // get current hour
     var currentHour = moment().hour();
-    console.log(currentHour);
+    console.log("checked time");
 
+    // get all text areas
     var timeBlocks = $("textarea");
 
+    // check each text area id against current hour and style accordingly
     $.each(timeBlocks, function(i, block) {
         var blockId = $(block).attr("id");
 
@@ -62,6 +65,10 @@ var timeChecker = function () {
     })
 };
 
+var timeCheckTimer = function () {
+    setInterval(timeChecker, 1000 * 60 * 5);
+};
+
 // save data in time block array to local storage
 var saveBlocks = function () {
     localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
@@ -77,5 +84,7 @@ $(".saveBtn").on("click", function () {
     console.log(timeBlocks);
 })
 
-loadBlocks();
 timeChecker();
+timeCheckTimer();
+loadBlocks();
+
