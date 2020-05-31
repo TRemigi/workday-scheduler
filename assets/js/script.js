@@ -65,6 +65,7 @@ var timeChecker = function () {
     })
 };
 
+// function to run timeCheck every five minutes
 var timeCheckTimer = function () {
     setInterval(timeChecker, 1000 * 60 * 5);
 };
