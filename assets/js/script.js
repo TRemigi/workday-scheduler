@@ -36,7 +36,6 @@ var loadBlocks = function () {
 var timeChecker = function () {
     // get current hour
     var currentHour = moment().hour();
-    console.log("checked time");
 
     // get all text areas
     var timeBlocks = $("textarea");
