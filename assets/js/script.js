@@ -9,7 +9,6 @@ var timeBlocks = {};
 // load data from local storage and fill in applicable time blocks
 var loadBlocks = function () {
     timeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
-    console.log(timeBlocks);
 
     // create key's in time block object if empty
     if (!timeBlocks) {
@@ -26,13 +25,11 @@ var loadBlocks = function () {
         };
     }
     // NEED TO LOOP THROUGH KEY VALUES AND WRITE TO TEXT AREA WITH CORRESPONDING ID NUMBER
-    for (i=0; i<Object.timeBlocks.length; i++) {
-        var taskText = timeBlocks[i].val().trim();
-        var currentBlock = $(".container").find('#' + i);
-        
-    }
-
-console.log(timeBlocks.length);
+    $.each(timeBlocks, function(blockNumber, blockText) {
+        var timeBlock = $("#" + blockNumber);
+        $(timeBlock).text(blockText);
+        console.log(timeBlock);
+    });
 };
 
 // save data in time block array to local storage
